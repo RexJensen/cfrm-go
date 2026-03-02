@@ -23,9 +23,14 @@ profile.cov
 # Go workspace file
 go.work
 go.work.sum
+.gocache
+
+# project output
+output/*
 
 # env file
 .env
+.DS_Store
 
 # Editor/IDE
 # .idea/
