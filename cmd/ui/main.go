@@ -27,7 +27,8 @@ func main() {
 		}
 		// Escape </script> so the JSON is safe inside a <script> tag.
 		escaped := strings.ReplaceAll(string(jsonData), "</", `<\/`)
-		html := "<script>window.__DATA__ = " + escaped + ";</script>\n" + string(indexHTML)
+		dataTag := "<script>window.__DATA__ = " + escaped + ";</script>"
+		html := strings.Replace(string(indexHTML), "</head>", dataTag+"\n</head>", 1)
 		if err := os.WriteFile(*staticPath, []byte(html), 0o644); err != nil {
 			log.Fatalf("write static file: %v", err)
 		}
