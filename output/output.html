@@ -1,0 +1,823 @@
+<script>window.__DATA__ = {
+  "data": {
+    "P1-": [
+      ["A",0.3211271,0.67887294,1,3.7396083,-0.7396085],
+      ["2",0.7646728,0.23532715,1,3.127785,-0.12778541],
+      ["3",0.9987193,0.0012807439,1,2.6521566,0.34784332],
+      ["4",0.67414385,0.32585618,1,2.2526302,0.7473696],
+      ["5",0.7569695,0.24303044,1,1.8679167,1.1320828],
+      ["6",0.54406714,0.4559329,1,1.4833117,1.5166878],
+      ["7",0.007604769,0.9923952,1,1.1584219,1.8415776],
+      ["8",0.0003806022,0.9996194,1,0.9101811,2.0898185],
+      ["9",0.000003844239,0.9999962,1,0.67936295,2.3206365],
+      ["T",0.000032205426,0.9999678,1,0.44857728,2.5514224],
+      ["J",0.0008400688,0.99915993,1,0.2176799,2.7823193],
+      ["Q",0.013597261,0.98640275,1,0.048814014,2.9511855],
+      ["K",0.9986573,0.0013427616,1,0.04202335,2.957976]
+    ],
+    "P1-Bet-Raise": [
+      ["A",0.000035730725,0.000011974186,0.9999523,0.3215389,5.192114,-2.192114],
+      ["2",0.99998486,0.0000050283793,0.000010181958,0.76565343,4.192281,-1.1922817],
+      ["3",0.9986319,0.000001283058,0.001366811,1,3.6532948,-0.6532951],
+      ["4",0.9487559,0.030184202,0.02105988,0.6750084,2.9795818,0.020417456],
+      ["5",0.3833793,0.59941536,0.017205339,0.75794023,0.42650843,2.5734916],
+      ["6",0.6248084,0.35291475,0.022276906,0.5447648,0.9628861,2.037114],
+      ["7",0.0011154114,0.99871606,0.00016850197,0.007614521,-0.9967751,3.996775],
+      ["8",0.9043864,0.07039631,0.02521727,0.0003810902,0.835687,2.1643136],
+      ["9",0.3333333,0.3333333,0.3333333,0.0000038491685,0.31562477,2.6843758],
+      ["T",0.8429958,0.03978873,0.11721542,0.00003224672,0.033830266,2.9661698],
+      ["J",0.0015253671,0.9969492,0.0015253671,0.00084114604,-0.99562943,3.9956295],
+      ["Q",0.00009424261,0.80775183,0.19215396,0.013614698,-0.49764225,3.4976416],
+      ["K",0.0000012831371,0.99930924,0.0006894321,0.99993783,-0.9982002,3.9982007]
+    ],
+    "P1-Bet-Raise-Raise-Raise": [
+      ["A",0.999994,0.000005987379,1,6.576866,-3.5768661],
+      ["2",0.75307405,0.24692594,0.000024246598,3.5749156,-0.5749155],
+      ["3",0.2814156,0.71858436,0.004251045,-0.78114605,3.781147],
+      ["4",0.0013661925,0.9986338,0.04421323,-2.990384,5.990384],
+      ["5",0.004285476,0.99571455,0.040558834,-2.9734626,5.9734635],
+      ["6",0.00005288945,0.99994713,0.037744287,-2.999717,5.9997168],
+      ["7",0.5,0.5,0.000003990569,-0.7500003,3.750001],
+      ["8",0.9332441,0.06675591,0.000029889123,0.40993035,2.5900702],
+      ["9",0.5,0.5,0.0000039905526,-1.5961537,4.5961533],
+      ["T",0.8302752,0.16972482,0.000011755947,-1.3713833,4.371383],
+      ["J",0.5,0.5,0.0000039905535,-2.4423072,5.4423065],
+      ["Q",0.00024522684,0.9997548,0.008136629,-2.9999347,5.9999347],
+      ["K",0.012652713,0.9873473,0.002144133,-3.0072997,6.0073]
+    ],
+    "P1-Check-Bet": [
+      ["A",0.0000018880488,0.0000018880488,0.99999624,0.6788753,4.5372467,-1.5372461],
+      ["2",0.000010663387,0.000005446411,0.9999839,0.23532803,3.7677977,-0.76779795],
+      ["3",0.0010005233,0.0010005233,0.99799895,0.0012807486,3.064232,-0.0642323],
+      ["4",0.99927783,0.0000039338984,0.0007182492,0.32585737,2.65403,0.34596974],
+      ["5",0.9979223,0.00006876495,0.0020089014,0.2430313,2.2691767,0.73082376],
+      ["6",0.9997944,0.00003992504,0.00016568933,0.4559345,1.8845885,1.115412],
+      ["7",0.99994004,0.000058619567,0.000001291238,0.9923987,1.4999124,1.5000879],
+      ["8",0.6696215,0.32839802,0.0019804845,0.9996231,0.74922174,2.2507782],
+      ["9",0.6242342,0.3742829,0.0014828678,1,0.45724142,2.5427582],
+      ["T",0.6263455,0.37092137,0.0027330513,0.99997133,0.21759109,2.7824094],
+      ["J",0.5618871,0.4342213,0.0038915544,0.9991635,-0.022255663,3.022256],
+      ["Q",0.00001733893,0.8550682,0.14491442,0.9864064,-0.05555347,3.0555534],
+      ["K",0.000954312,0.5931839,0.40586177,0.0013427667,-0.15638785,3.1563873]
+    ],
+    "P1-Check-Bet-Raise-Raise": [
+      ["A",6.29352e-7,6.29352e-7,0.9999987,1,5.9711647,-2.9711645],
+      ["2",0.5841986,0.41247922,0.003322232,0.3466397,2.0905924,0.90940726],
+      ["3",0.00033417647,0.99933165,0.00033417647,0.0018828061,-1.9956678,4.995668],
+      ["4",0.22799052,0.0018256888,0.7701838,0.00034475798,4.4165187,-1.4165193],
+      ["5",0.00087511534,0.9982498,0.00087511534,0.00071917154,-1.9898859,4.989886],
+      ["6",0.42612237,0.012444109,0.5614335,0.000111277805,3.5306633,-0.53066283],
+      ["7",0.33333334,0.33333334,0.33333334,0.0000018875747,1.3890077,1.6109926],
+      ["8",0.00026264566,0.999472,0.00026538345,0.0029162136,-1.9975507,4.997551],
+      ["9",0.0002881888,0.99942356,0.0002881888,0.0021843084,-1.997697,4.997697],
+      ["T",0.001454907,0.99719065,0.0013543798,0.0040257517,-1.990982,4.9909816],
+      ["J",0.0009891568,0.9980217,0.0009891568,0.0057275817,-1.9949229,4.994923],
+      ["Q",0.000002988639,0.99934155,0.0006555017,0.21056153,-1.997338,4.9973373],
+      ["K",0.0007837742,0.9984325,0.0007837742,0.0008027683,-1.9973316,4.9973316]
+    ],
+    "P2-Bet": [
+      ["A",0.000046931797,0.0000025628262,0.9999505,1,-1.407068,4.407068],
+      ["2",0.00004647628,0.0000025628262,0.999951,1,-0.7062795,3.7062793],
+      ["3",0.80793595,0.0000025631098,0.19206148,1,-0.03829485,3.0382943],
+      ["4",0.9998891,0.0000025628262,0.00010840043,1,0.34615773,2.6538415],
+      ["5",0.99981165,0.0000025628265,0.0001857899,1,0.7307682,2.2692313],
+      ["6",0.99995065,0.0000025628262,0.000046782035,1,1.1153827,1.8846171],
+      ["7",0.74102056,0.25855234,0.0004271077,1,1.8877853,1.1122141],
+      ["8",0.6343093,0.35370925,0.011981454,1,2.2770135,0.7229859],
+      ["9",0.5324152,0.4643711,0.003213689,1,2.6078446,0.39215502],
+      ["T",0.62418455,0.37129048,0.0045249867,1,2.7810328,0.21896675],
+      ["J",0.66803014,0.30002397,0.031945787,1,3.0124743,-0.012474989],
+      ["Q",0.047309328,0.92721844,0.02547225,1,3.0094874,-0.009487521],
+      ["K",0.00008676683,0.7115609,0.2883523,1,2.880894,0.11910563]
+    ],
+    "P2-Bet-Raise-Raise": [
+      ["A",0.00009129083,8.543177e-7,0.99990785,0.9999994,-2.9858582,5.985859],
+      ["2",0.8304505,0.16907164,0.00047786144,1,-0.7846746,3.7846744],
+      ["3",0.48077688,0.51775956,0.001463484,0.19207089,1.9759374,1.024063],
+      ["4",0.64304525,0.007880739,0.34907404,0.00010840575,-0.9204387,3.9204383],
+      ["5",0.39306962,0.0045980727,0.60233235,0.00018579903,-0.946293,3.946292],
+      ["6",0.51191026,0.018260757,0.46982896,0.000046784324,-0.28580135,3.285802],
+      ["7",0.13599189,0.79877,0.06523803,0.00042712857,4.1018653,-1.101865],
+      ["8",0.0031283123,0.99514776,0.0017240099,0.01198204,4.9811063,-1.9811065],
+      ["9",0.003198606,0.9935746,0.003226753,0.0032138466,4.976266,-1.9762661],
+      ["T",0.0023620191,0.99513495,0.0025030253,0.0045252074,4.984886,-1.9848857],
+      ["J",0.00026817527,0.9993978,0.00033401756,0.031947356,4.998423,-1.9984238],
+      ["Q",0.0005374066,0.9988787,0.00058381475,0.025473496,4.99769,-1.9976895],
+      ["K",0.0000041506555,0.9997669,0.00022899781,0.28836647,4.999106,-1.999106]
+    ],
+    "P2-Check": [
+      ["A",0.99997425,0.000025791194,1,-0.82297164,3.822971],
+      ["2",0.9999755,0.000024507317,1,-0.23869397,3.2386937],
+      ["3",0.99997616,0.000023851439,1,0.3110822,2.6889174],
+      ["4",0.9999923,0.000007688478,1,0.7649328,2.2350671],
+      ["5",0.9999962,0.000003844239,1,1.1366116,1.8633881],
+      ["6",0.9996123,0.00038776756,1,1.5078926,1.4921068],
+      ["7",0.2212126,0.7787874,1,1.5841644,1.4158353],
+      ["8",0.0001407366,0.9998592,1,1.7308385,1.2691609],
+      ["9",0.00004577794,0.9999542,1,1.9615573,1.0384423],
+      ["T",0.00013050987,0.99986947,1,2.192369,0.8076308],
+      ["J",0.000058953072,0.99994105,1,2.4231043,0.5768951],
+      ["Q",0.5596628,0.4403372,1,2.888594,0.11140578],
+      ["K",0.9999923,0.000007688478,1,3.0895534,-0.089553684]
+    ],
+    "P2-Check-Bet-Raise": [
+      ["A",0.00005092578,0.0000025628924,0.99994653,0.9999779,-2.1095228,5.109523],
+      ["2",0.9976563,0.0000025628924,0.0023412108,0.9999792,-1.1929734,4.192973],
+      ["3",0.94134367,0.05004275,0.008613619,0.99997985,-0.41616237,3.4161623],
+      ["4",0.5633083,0.42398685,0.012704834,0.99999595,1.6309481,1.3690519],
+      ["5",0.7091663,0.2651511,0.025682548,1,1.362745,1.6372548],
+      ["6",0.76746374,0.18948267,0.04305359,0.99961597,1.5059835,1.4940165],
+      ["7",0.5234196,0.40501732,0.07156305,0.2212134,2.4408336,0.55916655],
+      ["8",0.94327617,0.038250178,0.018473675,0.00014073712,2.0890536,0.91094655],
+      ["9",0.75715137,0.05598387,0.18686476,0.00004577811,2.321814,0.6781854],
+      ["T",0.86485314,0.01963703,0.11550982,0.00013051032,2.8652742,0.13472629],
+      ["J",0.80856895,0.0805568,0.11087418,0.000058953297,3.3629642,-0.36296433],
+      ["Q",0.000057751004,0.97527903,0.024663206,0.55966496,3.9165418,-0.91654277],
+      ["K",0.0000044849835,0.99948865,0.0005068322,0.99999595,3.998288,-0.9982879]
+    ],
+    "P2-Check-Bet-Raise-Raise-Raise": [
+      ["A",0.99999875,0.0000012815148,1,-3.576911,6.5769105],
+      ["2",0.99945265,0.00054734334,0.0023413391,-2.72599,5.72599],
+      ["3",0.021668797,0.9783312,0.008614096,5.82915,-2.8291502],
+      ["4",0.008982385,0.9910176,0.012705741,5.9367785,-2.9367776],
+      ["5",0.008739651,0.9912604,0.025684481,5.945881,-2.9458814],
+      ["6",0.000057923407,0.99994206,0.0430403,5.9996905,-2.9996903],
+      ["7",0.004728346,0.9952716,0.015831899,5.978723,-2.9787226],
+      ["8",0.50713414,0.49286586,0.0000026001285,4.14701,-1.1470101],
+      ["9",0.8502022,0.14979783,0.000008554962,3.6128936,-0.612894],
+      ["T",0.9149985,0.08500156,0.000015076365,4.205195,-1.2051954],
+      ["J",0.8039566,0.19604337,0.000006536891,5.1032786,-2.1032794],
+      ["Q",0.0027541951,0.99724585,0.01380417,5.99926,-2.9992592],
+      ["K",0.0025282986,0.9974717,0.00050686847,6.0014586,-3.0014584]
+    ]
+  },
+  "config": "evaluateLowCardAceLow",
+    "configFile": {
+      "POT_SIZE": 3,
+      "ITERATIONS": 10000,
+      "OUTPUT": "output.json",
+      "EVALUATOR": "LOW_CARD",
+      "TREE": {
+        "STREET_RIVER_MAX_BETS": 4,
+        "P1_RANGE": "A:1,K:1,Q:1,J:1,T:1,9:1,8:1,7:1,6:1,5:1,4:1,3:1,2:1",
+        "P2_RANGE": "A:1,K:1,Q:1,J:1,T:1,9:1,8:1,7:1,6:1,5:1,4:1,3:1,2:1"
+      }
+    },
+    "stats": {
+      "ev": {
+        "evs": [1.4329593,1.5670407],
+        "ev1": 1.4329593,
+        "ev2": 1.5670407
+      },
+      "exploitability": {
+        "p1": 0.00056409836,
+        "p2": 0.00075924397,
+        "total": 0.00066167116,
+        "p1_pct": 0.00018803279,
+        "p2_pct": 0.00025308132,
+        "total_pct": 0.00022055705,
+        "br": {
+          "p1": {
+            "evs": [1.4335234,1.5664766],
+            "ev1": 1.4335234,
+            "ev2": 1.5664766
+          },
+          "p2": {
+            "evs": [1.4322001,1.5677999],
+            "ev1": 1.4322001,
+            "ev2": 1.5677999
+          }
+        }
+      },
+      "isMeta": {
+        "P1-": {
+          "allStrat": [0.39083195,0.60916805],
+          "labels": ["bet","check"]
+        },
+        "P1-Bet-Raise": {
+          "allStrat": [0.59678453,0.331348,0.0718673],
+          "labels": ["call","fold","raise"]
+        },
+        "P1-Bet-Raise-Raise-Raise": {
+          "allStrat": [0.8807445,0.11925549],
+          "labels": ["call","fold"]
+        },
+        "P1-Check-Bet": {
+          "allStrat": [0.5679478,0.29695696,0.13509518],
+          "labels": ["call","fold","raise"]
+        },
+        "P1-Check-Bet-Raise-Raise": {
+          "allStrat": [0.12859121,0.23582277,0.6355862],
+          "labels": ["call","fold","raise"]
+        },
+        "P2-Bet": {
+          "allStrat": [0.5426951,0.2605186,0.19678627],
+          "labels": ["call","fold","raise"]
+        },
+        "P2-Bet-Raise-Raise": {
+          "allStrat": [0.36085477,0.247877,0.39126813],
+          "labels": ["call","fold","raise"]
+        },
+        "P2-Check": {
+          "allStrat": [0.5985208,0.4014792],
+          "labels": ["bet","check"]
+        },
+        "P2-Check-Bet-Raise": {
+          "allStrat": [0.52627045,0.3294671,0.14426239],
+          "labels": ["call","fold","raise"]
+        },
+        "P2-Check-Bet-Raise-Raise-Raise": {
+          "allStrat": [0.89349955,0.10650045],
+          "labels": ["call","fold"]
+        }
+      },
+      "solver": {
+        "iteration": 10000,
+        "total": 10000,
+        "pot": 3,
+        "total_infosets": 130,
+        "total_decision_nodes": 10,
+        "num_players": 2
+      }
+    }
+ 
+}
+;</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CFRM Solver</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d14;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #11111c;
+      border-bottom: 1px solid #23233a;
+      padding: 14px 24px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: 0.3px;
+    }
+
+    .header-sub {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #475569;
+    }
+
+    .stat-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-value.blue  { color: #60a5fa; }
+    .stat-value.green { color: #4ade80; }
+    .stat-value.amber { color: #fbbf24; }
+
+    .stat-divider {
+      width: 1px;
+      height: 28px;
+      background: #23233a;
+    }
+
+    /* ── Node grid ── */
+    .nodes-container {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    /* ── Node card ── */
+    .node-card {
+      background: #13131f;
+      border: 1px solid #23233a;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 360px;
+      flex-shrink: 0;
+    }
+
+    .node-header {
+      background: #1a1a2e;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #23233a;
+    }
+
+    .node-title {
+      font-weight: 700;
+      font-size: 12px;
+      color: #c7d2fe;
+      letter-spacing: 0.3px;
+      flex: 1;
+    }
+
+    .node-player-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: #2d2d4a;
+      color: #818cf8;
+    }
+
+    /* ── Strategy summary ── */
+    .strategy-summary {
+      padding: 10px 14px 8px;
+      border-bottom: 1px solid #1a1a2a;
+    }
+
+    .strategy-bar {
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 22px;
+      margin-bottom: 8px;
+    }
+
+    .strategy-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.65);
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      min-width: 0;
+    }
+
+    .strategy-seg:hover { opacity: 0.85; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-pct {
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    /* ── Hand table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: #0f0f1c;
+      padding: 5px 8px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #3f4f6a;
+      border-bottom: 1px solid #23233a;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    thead th.col-hand    { text-align: center; width: 38px; }
+    thead th.col-strat   { text-align: left;   min-width: 90px; }
+    thead th.col-action  { min-width: 42px; }
+
+    tbody tr {
+      border-bottom: 1px solid #141422;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+
+    tbody tr:hover { background: #1a1a2e; }
+
+    tbody td {
+      padding: 4px 8px;
+      text-align: right;
+      color: #6b7280;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+
+    td.col-hand  { text-align: center; }
+    td.col-strat { text-align: left; padding-right: 10px; }
+
+    .hand-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      background: #23233a;
+      color: #e2e8f0;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .mini-bar {
+      display: flex;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 14px;
+      width: 90px;
+    }
+
+    .mini-seg { min-width: 0; }
+
+    .ev-pos  { color: #4ade80; }
+    .ev-neg  { color: #f87171; }
+    .ev-zero { color: #374151; }
+
+    /* ── Loading / error ── */
+    #loading, #error-msg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      font-size: 16px;
+      color: #475569;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #error-msg { color: #f87171; }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #23233a;
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="loading">
+    <div class="spinner"></div>
+    Loading solver output…
+  </div>
+</div>
+
+<script>
+  /* ── Colour palette ── */
+  const COLORS = {
+    bet:   '#ef4444',
+    check: '#22c55e',
+    call:  '#f97316',
+    fold:  '#22c55e',
+    raise: '#3b82f6',
+  };
+
+  function color(label) {
+    return COLORS[label.toLowerCase()] ?? '#8b5cf6';
+  }
+
+  /* ── Formatting helpers ── */
+  function f3(n)  { return n == null ? '—' : n.toFixed(3); }
+  function pct(n) { return n == null ? '—' : (n * 100).toFixed(1) + '%'; }
+  function evCls(v) {
+    if (v >  0.005) return 'ev-pos';
+    if (v < -0.005) return 'ev-neg';
+    return 'ev-zero';
+  }
+
+  /* ── Strategy bar (shared) ── */
+  function makeBar(strats, labels, cls, height) {
+    const bar = document.createElement('div');
+    bar.className = cls;
+    if (height) bar.style.height = height + 'px';
+    strats.forEach((s, i) => {
+      if (s <= 0) return;
+      const seg = document.createElement('div');
+      seg.className = cls === 'strategy-bar' ? 'strategy-seg' : 'mini-seg';
+      seg.style.width = (s * 100) + '%';
+      seg.style.background = color(labels[i]);
+      seg.title = labels[i] + ': ' + (s * 100).toFixed(1) + '%';
+      if (cls === 'strategy-bar' && s > 0.10) {
+        seg.textContent = (s * 100).toFixed(0) + '%';
+      }
+      bar.appendChild(seg);
+    });
+    return bar;
+  }
+
+  /* ── Node card ── */
+  function renderNode(key, rows, meta) {
+    const { labels, allStrat } = meta;
+    const n = labels.length;
+
+    /* card wrapper */
+    const card = document.createElement('div');
+    card.className = 'node-card';
+
+    /* header */
+    const hdr = document.createElement('div');
+    hdr.className = 'node-header';
+
+    const title = document.createElement('div');
+    title.className = 'node-title';
+    title.textContent = 'Node: ' + key;
+
+    const playerNum = key.startsWith('P1') ? '1' : '2';
+    const badge = document.createElement('div');
+    badge.className = 'node-player-badge';
+    badge.textContent = 'P' + playerNum;
+
+    hdr.appendChild(title);
+    hdr.appendChild(badge);
+    card.appendChild(hdr);
+
+    /* strategy summary */
+    const summary = document.createElement('div');
+    summary.className = 'strategy-summary';
+    summary.appendChild(makeBar(allStrat, labels, 'strategy-bar'));
+
+    const legend = document.createElement('div');
+    legend.className = 'legend';
+    labels.forEach((lbl, i) => {
+      const item = document.createElement('div');
+      item.className = 'legend-item';
+
+      const dot = document.createElement('div');
+      dot.className = 'legend-dot';
+      dot.style.background = color(lbl);
+
+      const txt = document.createElement('span');
+      txt.innerHTML = lbl.charAt(0).toUpperCase() + lbl.slice(1) +
+        ' <span class="legend-pct">' + (allStrat[i] * 100).toFixed(1) + '%</span>';
+
+      item.appendChild(dot);
+      item.appendChild(txt);
+      legend.appendChild(item);
+    });
+    summary.appendChild(legend);
+    card.appendChild(summary);
+
+    /* table */
+    const table = document.createElement('table');
+
+    /* thead */
+    const thead = document.createElement('thead');
+    const hrow  = document.createElement('tr');
+
+    function th(text, cls, col) {
+      const el = document.createElement('th');
+      el.textContent = text;
+      if (cls)  el.className = cls;
+      if (col)  el.style.color = color(col);
+      hrow.appendChild(el);
+    }
+
+    th('Hand',   'col-hand');
+    th('Strategy', 'col-strat');
+    labels.forEach(lbl => th(lbl.slice(0, 3).toUpperCase(), 'col-action', lbl));
+    th('Freq',   'col-action');
+    th('EV1',    'col-action');
+    th('EV2',    'col-action');
+
+    thead.appendChild(hrow);
+    table.appendChild(thead);
+
+    /* tbody */
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+      const hand   = row[0];
+      const strats = row.slice(1, 1 + n).map(Number);
+      const freq   = Number(row[1 + n]);
+      const ev1    = Number(row[2 + n]);
+      const ev2    = Number(row[3 + n]);
+
+      const tr = document.createElement('tr');
+
+      /* hand chip */
+      const tdHand = document.createElement('td');
+      tdHand.className = 'col-hand';
+      const chip = document.createElement('span');
+      chip.className = 'hand-chip';
+      chip.textContent = hand;
+      tdHand.appendChild(chip);
+      tr.appendChild(tdHand);
+
+      /* mini strategy bar */
+      const tdBar = document.createElement('td');
+      tdBar.className = 'col-strat';
+      tdBar.appendChild(makeBar(strats, labels, 'mini-bar'));
+      tr.appendChild(tdBar);
+
+      /* per-action % */
+      strats.forEach(s => {
+        const td = document.createElement('td');
+        td.className = 'col-action';
+        td.textContent = (s * 100).toFixed(0) + '%';
+        tr.appendChild(td);
+      });
+
+      /* freq */
+      const tdFreq = document.createElement('td');
+      tdFreq.className = 'col-action';
+      tdFreq.textContent = (freq * 100).toFixed(1) + '%';
+      tr.appendChild(tdFreq);
+
+      /* ev1 */
+      const tdEV1 = document.createElement('td');
+      tdEV1.className = 'col-action ' + evCls(ev1);
+      tdEV1.textContent = f3(ev1);
+      tr.appendChild(tdEV1);
+
+      /* ev2 */
+      const tdEV2 = document.createElement('td');
+      tdEV2.className = 'col-action ' + evCls(ev2);
+      tdEV2.textContent = f3(ev2);
+      tr.appendChild(tdEV2);
+
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    card.appendChild(table);
+
+    return card;
+  }
+
+  /* ── Main render ── */
+  function renderApp(payload) {
+    const { data: nodeData, config: evaluator, stats } = payload;
+    const { ev, exploitability, isMeta, solver } = stats;
+
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+
+    /* header */
+    const header = document.createElement('header');
+
+    const top = document.createElement('div');
+    top.className = 'header-top';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'header-title';
+    titleEl.textContent = 'CFRM Solver';
+
+    const subEl = document.createElement('div');
+    subEl.className = 'header-sub';
+    subEl.textContent = evaluator + ' · ' + solver.total.toLocaleString() + ' iterations';
+
+    top.appendChild(titleEl);
+    top.appendChild(subEl);
+    header.appendChild(top);
+
+    const statsRow = document.createElement('div');
+    statsRow.className = 'header-stats';
+
+    function addStat(label, value, cls) {
+      const item = document.createElement('div');
+      item.className = 'stat-item';
+      const lbl = document.createElement('div');
+      lbl.className = 'stat-label';
+      lbl.textContent = label;
+      const val = document.createElement('div');
+      val.className = 'stat-value' + (cls ? ' ' + cls : '');
+      val.textContent = value;
+      item.appendChild(lbl);
+      item.appendChild(val);
+      statsRow.appendChild(item);
+    }
+
+    function addDivider() {
+      const d = document.createElement('div');
+      d.className = 'stat-divider';
+      statsRow.appendChild(d);
+    }
+
+    addStat('Pot',       solver.pot,                          'blue');
+    addStat('Infosets',  solver.total_infosets.toLocaleString());
+    addStat('Nodes',     solver.total_decision_nodes.toLocaleString());
+    addDivider();
+    addStat('EV₁',       ev.ev1.toFixed(4), 'green');
+    addStat('EV₂',       ev.ev2.toFixed(4), 'green');
+
+    if (exploitability) {
+      addDivider();
+      addStat('Exploit P1',  exploitability.p1.toFixed(4) + '  (' + (exploitability.p1_pct * 100).toFixed(2) + '%)', 'amber');
+      addStat('Exploit P2',  exploitability.p2.toFixed(4) + '  (' + (exploitability.p2_pct * 100).toFixed(2) + '%)', 'amber');
+      addStat('Total',       exploitability.total.toFixed(4) + '  (' + (exploitability.total_pct * 100).toFixed(2) + '%)');
+    }
+
+    header.appendChild(statsRow);
+    app.appendChild(header);
+
+    /* nodes grid */
+    const grid = document.createElement('div');
+    grid.className = 'nodes-container';
+
+    /* sort: root nodes first (fewer dashes = shallower), then alpha */
+    const keys = Object.keys(nodeData).sort((a, b) => {
+      const da = a.split('-').length;
+      const db = b.split('-').length;
+      if (da !== db) return da - db;
+      return a.localeCompare(b);
+    });
+
+    keys.forEach(key => {
+      const rows = nodeData[key];
+      const meta = isMeta[key];
+      if (!meta) return;
+      grid.appendChild(renderNode(key, rows, meta));
+    });
+
+    app.appendChild(grid);
+  }
+
+  /* ── Bootstrap ── */
+  if (typeof window.__DATA__ !== 'undefined') {
+    renderApp(window.__DATA__);
+  } else {
+    fetch('/api/data')
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + r.statusText);
+        return r.json();
+      })
+      .then(renderApp)
+      .catch(err => {
+        document.getElementById('app').innerHTML =
+          '<div id="error-msg">' +
+          '<strong>Could not load solver output</strong>' +
+          '<span>' + err.message + '</span>' +
+          '<span style="color:#475569;font-size:11px">Run the solver first: go run ./cmd/cfrm -config config.json</span>' +
+          '</div>';
+      });
+  }
+</script>
+</body>
+</html>
