@@ -8,6 +8,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strings"
 )
 
 //go:embed index.html
@@ -15,8 +16,24 @@ var indexHTML []byte
 
 func main() {
 	outputPath := flag.String("output", "output/output.json", "path to solver output JSON")
+	staticPath := flag.String("static", "", "write a standalone HTML file here instead of starting a server")
 	port := flag.Int("port", 8080, "port to serve on")
 	flag.Parse()
+
+	if *staticPath != "" {
+		jsonData, err := os.ReadFile(*outputPath)
+		if err != nil {
+			log.Fatalf("read output: %v", err)
+		}
+		// Escape </script> so the JSON is safe inside a <script> tag.
+		escaped := strings.ReplaceAll(string(jsonData), "</", `<\/`)
+		html := "<script>window.__DATA__ = " + escaped + ";</script>\n" + string(indexHTML)
+		if err := os.WriteFile(*staticPath, []byte(html), 0o644); err != nil {
+			log.Fatalf("write static file: %v", err)
+		}
+		fmt.Printf("wrote standalone file: %s\n", *staticPath)
+		return
+	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")

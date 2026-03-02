@@ -555,20 +555,24 @@
   }
 
   /* ── Bootstrap ── */
-  fetch('/api/data')
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + r.statusText);
-      return r.json();
-    })
-    .then(renderApp)
-    .catch(err => {
-      document.getElementById('app').innerHTML =
-        '<div id="error-msg">' +
-        '<strong>Could not load solver output</strong>' +
-        '<span>' + err.message + '</span>' +
-        '<span style="color:#475569;font-size:11px">Run the solver first: go run ./cmd/cfrm -config config.json</span>' +
-        '</div>';
-    });
+  if (typeof window.__DATA__ !== 'undefined') {
+    renderApp(window.__DATA__);
+  } else {
+    fetch('/api/data')
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + r.statusText);
+        return r.json();
+      })
+      .then(renderApp)
+      .catch(err => {
+        document.getElementById('app').innerHTML =
+          '<div id="error-msg">' +
+          '<strong>Could not load solver output</strong>' +
+          '<span>' + err.message + '</span>' +
+          '<span style="color:#475569;font-size:11px">Run the solver first: go run ./cmd/cfrm -config config.json</span>' +
+          '</div>';
+      });
+  }
 </script>
 </body>
 </html>
