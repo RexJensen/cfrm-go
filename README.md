@@ -11,6 +11,7 @@ There's a lot more excitement and activity in the home grown solver world. I hop
 
 This code was entirely written by a coding agent (gpt-codex-5.3-medium) and based on prompts, code snippets, and notes from my personal research on CFRM and solving mixed games.
 
+Respects to the original CFRM paper which was the primary source material:
 https://proceedings.neurips.cc/paper/2007/file/08d98638c6fcd194a4b1e6992063e944-Paper.pdf
 
 ## Recommended Usage
