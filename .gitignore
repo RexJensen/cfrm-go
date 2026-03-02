@@ -28,6 +28,10 @@ go.work.sum
 # project output
 output/*
 
+# compiled binaries (go build artifacts)
+/cfrm
+/ui
+
 # env file
 .env
 .DS_Store
