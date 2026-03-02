@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CFRM Solver</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d14;
+      color: #e2e8f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #11111c;
+      border-bottom: 1px solid #23233a;
+      padding: 14px 24px 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .header-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: 0.3px;
+    }
+
+    .header-sub {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #475569;
+    }
+
+    .stat-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-value.blue  { color: #60a5fa; }
+    .stat-value.green { color: #4ade80; }
+    .stat-value.amber { color: #fbbf24; }
+
+    .stat-divider {
+      width: 1px;
+      height: 28px;
+      background: #23233a;
+    }
+
+    /* ── Node grid ── */
+    .nodes-container {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    /* ── Node card ── */
+    .node-card {
+      background: #13131f;
+      border: 1px solid #23233a;
+      border-radius: 8px;
+      overflow: hidden;
+      width: 360px;
+      flex-shrink: 0;
+    }
+
+    .node-header {
+      background: #1a1a2e;
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #23233a;
+    }
+
+    .node-title {
+      font-weight: 700;
+      font-size: 12px;
+      color: #c7d2fe;
+      letter-spacing: 0.3px;
+      flex: 1;
+    }
+
+    .node-player-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: #2d2d4a;
+      color: #818cf8;
+    }
+
+    /* ── Strategy summary ── */
+    .strategy-summary {
+      padding: 10px 14px 8px;
+      border-bottom: 1px solid #1a1a2a;
+    }
+
+    .strategy-bar {
+      display: flex;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 22px;
+      margin-bottom: 8px;
+    }
+
+    .strategy-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.65);
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      min-width: 0;
+    }
+
+    .strategy-seg:hover { opacity: 0.85; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-pct {
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    /* ── Hand table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: #0f0f1c;
+      padding: 5px 8px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #3f4f6a;
+      border-bottom: 1px solid #23233a;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    thead th.col-hand    { text-align: center; width: 38px; }
+    thead th.col-strat   { text-align: left;   min-width: 90px; }
+    thead th.col-action  { min-width: 42px; }
+
+    tbody tr {
+      border-bottom: 1px solid #141422;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+
+    tbody tr:hover { background: #1a1a2e; }
+
+    tbody td {
+      padding: 4px 8px;
+      text-align: right;
+      color: #6b7280;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+
+    td.col-hand  { text-align: center; }
+    td.col-strat { text-align: left; padding-right: 10px; }
+
+    .hand-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 4px;
+      background: #23233a;
+      color: #e2e8f0;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .mini-bar {
+      display: flex;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 14px;
+      width: 90px;
+    }
+
+    .mini-seg { min-width: 0; }
+
+    .ev-pos  { color: #4ade80; }
+    .ev-neg  { color: #f87171; }
+    .ev-zero { color: #374151; }
+
+    /* ── Loading / error ── */
+    #loading, #error-msg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      font-size: 16px;
+      color: #475569;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #error-msg { color: #f87171; }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #23233a;
+      border-top-color: #60a5fa;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="loading">
+    <div class="spinner"></div>
+    Loading solver output…
+  </div>
+</div>
+
+<script>
+  /* ── Colour palette ── */
+  const COLORS = {
+    bet:   '#ef4444',
+    check: '#22c55e',
+    call:  '#f97316',
+    fold:  '#22c55e',
+    raise: '#3b82f6',
+  };
+
+  function color(label) {
+    return COLORS[label.toLowerCase()] ?? '#8b5cf6';
+  }
+
+  /* ── Formatting helpers ── */
+  function f3(n)  { return n == null ? '—' : n.toFixed(3); }
+  function pct(n) { return n == null ? '—' : (n * 100).toFixed(1) + '%'; }
+  function evCls(v) {
+    if (v >  0.005) return 'ev-pos';
+    if (v < -0.005) return 'ev-neg';
+    return 'ev-zero';
+  }
+
+  /* ── Strategy bar (shared) ── */
+  function makeBar(strats, labels, cls, height) {
+    const bar = document.createElement('div');
+    bar.className = cls;
+    if (height) bar.style.height = height + 'px';
+    strats.forEach((s, i) => {
+      if (s <= 0) return;
+      const seg = document.createElement('div');
+      seg.className = cls === 'strategy-bar' ? 'strategy-seg' : 'mini-seg';
+      seg.style.width = (s * 100) + '%';
+      seg.style.background = color(labels[i]);
+      seg.title = labels[i] + ': ' + (s * 100).toFixed(1) + '%';
+      if (cls === 'strategy-bar' && s > 0.10) {
+        seg.textContent = (s * 100).toFixed(0) + '%';
+      }
+      bar.appendChild(seg);
+    });
+    return bar;
+  }
+
+  /* ── Node card ── */
+  function renderNode(key, rows, meta) {
+    const { labels, allStrat } = meta;
+    const n = labels.length;
+
+    /* card wrapper */
+    const card = document.createElement('div');
+    card.className = 'node-card';
+
+    /* header */
+    const hdr = document.createElement('div');
+    hdr.className = 'node-header';
+
+    const title = document.createElement('div');
+    title.className = 'node-title';
+    title.textContent = 'Node: ' + key;
+
+    const playerNum = key.startsWith('P1') ? '1' : '2';
+    const badge = document.createElement('div');
+    badge.className = 'node-player-badge';
+    badge.textContent = 'P' + playerNum;
+
+    hdr.appendChild(title);
+    hdr.appendChild(badge);
+    card.appendChild(hdr);
+
+    /* strategy summary */
+    const summary = document.createElement('div');
+    summary.className = 'strategy-summary';
+    summary.appendChild(makeBar(allStrat, labels, 'strategy-bar'));
+
+    const legend = document.createElement('div');
+    legend.className = 'legend';
+    labels.forEach((lbl, i) => {
+      const item = document.createElement('div');
+      item.className = 'legend-item';
+
+      const dot = document.createElement('div');
+      dot.className = 'legend-dot';
+      dot.style.background = color(lbl);
+
+      const txt = document.createElement('span');
+      txt.innerHTML = lbl.charAt(0).toUpperCase() + lbl.slice(1) +
+        ' <span class="legend-pct">' + (allStrat[i] * 100).toFixed(1) + '%</span>';
+
+      item.appendChild(dot);
+      item.appendChild(txt);
+      legend.appendChild(item);
+    });
+    summary.appendChild(legend);
+    card.appendChild(summary);
+
+    /* table */
+    const table = document.createElement('table');
+
+    /* thead */
+    const thead = document.createElement('thead');
+    const hrow  = document.createElement('tr');
+
+    function th(text, cls, col) {
+      const el = document.createElement('th');
+      el.textContent = text;
+      if (cls)  el.className = cls;
+      if (col)  el.style.color = color(col);
+      hrow.appendChild(el);
+    }
+
+    th('Hand',   'col-hand');
+    th('Strategy', 'col-strat');
+    labels.forEach(lbl => th(lbl.slice(0, 3).toUpperCase(), 'col-action', lbl));
+    th('Freq',   'col-action');
+    th('EV1',    'col-action');
+    th('EV2',    'col-action');
+
+    thead.appendChild(hrow);
+    table.appendChild(thead);
+
+    /* tbody */
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+      const hand   = row[0];
+      const strats = row.slice(1, 1 + n).map(Number);
+      const freq   = Number(row[1 + n]);
+      const ev1    = Number(row[2 + n]);
+      const ev2    = Number(row[3 + n]);
+
+      const tr = document.createElement('tr');
+
+      /* hand chip */
+      const tdHand = document.createElement('td');
+      tdHand.className = 'col-hand';
+      const chip = document.createElement('span');
+      chip.className = 'hand-chip';
+      chip.textContent = hand;
+      tdHand.appendChild(chip);
+      tr.appendChild(tdHand);
+
+      /* mini strategy bar */
+      const tdBar = document.createElement('td');
+      tdBar.className = 'col-strat';
+      tdBar.appendChild(makeBar(strats, labels, 'mini-bar'));
+      tr.appendChild(tdBar);
+
+      /* per-action % */
+      strats.forEach(s => {
+        const td = document.createElement('td');
+        td.className = 'col-action';
+        td.textContent = (s * 100).toFixed(0) + '%';
+        tr.appendChild(td);
+      });
+
+      /* freq */
+      const tdFreq = document.createElement('td');
+      tdFreq.className = 'col-action';
+      tdFreq.textContent = (freq * 100).toFixed(1) + '%';
+      tr.appendChild(tdFreq);
+
+      /* ev1 */
+      const tdEV1 = document.createElement('td');
+      tdEV1.className = 'col-action ' + evCls(ev1);
+      tdEV1.textContent = f3(ev1);
+      tr.appendChild(tdEV1);
+
+      /* ev2 */
+      const tdEV2 = document.createElement('td');
+      tdEV2.className = 'col-action ' + evCls(ev2);
+      tdEV2.textContent = f3(ev2);
+      tr.appendChild(tdEV2);
+
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    card.appendChild(table);
+
+    return card;
+  }
+
+  /* ── Main render ── */
+  function renderApp(payload) {
+    const { data: nodeData, config: evaluator, stats } = payload;
+    const { ev, exploitability, isMeta, solver } = stats;
+
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+
+    /* header */
+    const header = document.createElement('header');
+
+    const top = document.createElement('div');
+    top.className = 'header-top';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'header-title';
+    titleEl.textContent = 'CFRM Solver';
+
+    const subEl = document.createElement('div');
+    subEl.className = 'header-sub';
+    subEl.textContent = evaluator + ' · ' + solver.total.toLocaleString() + ' iterations';
+
+    top.appendChild(titleEl);
+    top.appendChild(subEl);
+    header.appendChild(top);
+
+    const statsRow = document.createElement('div');
+    statsRow.className = 'header-stats';
+
+    function addStat(label, value, cls) {
+      const item = document.createElement('div');
+      item.className = 'stat-item';
+      const lbl = document.createElement('div');
+      lbl.className = 'stat-label';
+      lbl.textContent = label;
+      const val = document.createElement('div');
+      val.className = 'stat-value' + (cls ? ' ' + cls : '');
+      val.textContent = value;
+      item.appendChild(lbl);
+      item.appendChild(val);
+      statsRow.appendChild(item);
+    }
+
+    function addDivider() {
+      const d = document.createElement('div');
+      d.className = 'stat-divider';
+      statsRow.appendChild(d);
+    }
+
+    addStat('Pot',       solver.pot,                          'blue');
+    addStat('Infosets',  solver.total_infosets.toLocaleString());
+    addStat('Nodes',     solver.total_decision_nodes.toLocaleString());
+    addDivider();
+    addStat('EV₁',       ev.ev1.toFixed(4), 'green');
+    addStat('EV₂',       ev.ev2.toFixed(4), 'green');
+
+    if (exploitability) {
+      addDivider();
+      addStat('Exploit P1',  exploitability.p1.toFixed(4) + '  (' + (exploitability.p1_pct * 100).toFixed(2) + '%)', 'amber');
+      addStat('Exploit P2',  exploitability.p2.toFixed(4) + '  (' + (exploitability.p2_pct * 100).toFixed(2) + '%)', 'amber');
+      addStat('Total',       exploitability.total.toFixed(4) + '  (' + (exploitability.total_pct * 100).toFixed(2) + '%)');
+    }
+
+    header.appendChild(statsRow);
+    app.appendChild(header);
+
+    /* nodes grid */
+    const grid = document.createElement('div');
+    grid.className = 'nodes-container';
+
+    /* sort: root nodes first (fewer dashes = shallower), then alpha */
+    const keys = Object.keys(nodeData).sort((a, b) => {
+      const da = a.split('-').length;
+      const db = b.split('-').length;
+      if (da !== db) return da - db;
+      return a.localeCompare(b);
+    });
+
+    keys.forEach(key => {
+      const rows = nodeData[key];
+      const meta = isMeta[key];
+      if (!meta) return;
+      grid.appendChild(renderNode(key, rows, meta));
+    });
+
+    app.appendChild(grid);
+  }
+
+  /* ── Bootstrap ── */
+  fetch('/api/data')
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status + ' — ' + r.statusText);
+      return r.json();
+    })
+    .then(renderApp)
+    .catch(err => {
+      document.getElementById('app').innerHTML =
+        '<div id="error-msg">' +
+        '<strong>Could not load solver output</strong>' +
+        '<span>' + err.message + '</span>' +
+        '<span style="color:#475569;font-size:11px">Run the solver first: go run ./cmd/cfrm -config config.json</span>' +
+        '</div>';
+    });
+</script>
+</body>
+</html>
