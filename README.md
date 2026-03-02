@@ -52,9 +52,7 @@ Shows a terminal progress bar and writes `output/output.json`.
 
 The solver writes JSON to `output/output.json` with this shape:
 
-- `p1`: player-1 infoset buckets only
-- `p2`: player-2 infoset buckets only
-- `data`: all infoset buckets (`p1` + `p2`)
+- `data`: all infoset buckets
 - `config`: evaluator name string (`evaluateHighCardAceLow` or `evaluateLowCardAceLow`)
 - `configFile`: resolved config used for the run
 - `stats`:
@@ -64,19 +62,14 @@ The solver writes JSON to `output/output.json` with this shape:
     - `p1_pct`, `p2_pct`, `total_pct`
     - `br.p1`, `br.p2` (each has `evs`, `ev1`, `ev2`)
   - `isMeta`: per-infoset metadata (`allStrat`, `labels`)
-  - `solver`: run stats (`iteration`, `total`, `pot`, `total_infosets`, `num_players`)
+  - `solver`: run stats (`iteration`, `total`, `pot`, `total_infosets`, `total_decision_nodes`, `num_players`)
+    - `total_infosets`: concrete per-hand infosets
+    - `total_decision_nodes`: hand-collapsed infosets (same count as `stats.isMeta` entries)
 
-Each infoset bucket in `p1`, `p2`, and `data` maps to rows by hand:
+Each infoset bucket in `data` maps to rows by hand:
 
 ```json
-[
-  "A",
-  0.72,
-  0.28,
-  1.0,
-  0.61,
-  0.39
-]
+["A",0.72,0.28,1.0,0.61,0.39]
 ```
 
 Row layout is:
@@ -86,3 +79,9 @@ Row layout is:
 3. normalized frequency (max row frequency in bucket = 1.0)
 4. `ev1` for this hand+infoset
 5. `ev2` for this hand+infoset
+
+Vector formatting notes:
+
+- hand rows in `data` are serialized as compact one-line arrays
+- `stats.ev.evs`, `stats.exploitability.br.p1.evs`, and `stats.exploitability.br.p2.evs` are one-line arrays
+- each `stats.isMeta[infoset].allStrat` and `stats.isMeta[infoset].labels` is a one-line array
